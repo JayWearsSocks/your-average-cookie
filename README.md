@@ -41,3 +41,9 @@ scrapy crawl [name-of-spider]
 
 See also the [Scrapy Tutorial](https://docs.scrapy.org/en/latest/intro/tutorial.html).
 
+The interactive scrapy shell can be used to explore the content of a page, replacing the url with the page you want:
+
+```bash
+scrapy shell "https://quotes.toscrape.com/page/1/"
+``` 
+

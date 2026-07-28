@@ -51,3 +51,4 @@ scrapy shell "https://quotes.toscrape.com/page/1/"
 
 Set the USER_AGENT to your browser's user agent. Can be found at e.g. https://www.whatismybrowser.com/detect/what-is-my-user-agent/
 
+To avoid getting blocked, enabled the AutoThrottle extension and crawled pages one-by-one instead of using spider to find next page.

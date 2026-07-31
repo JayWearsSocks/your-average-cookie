@@ -1,4 +1,3 @@
-from pathlib import Path
 from .parsing import Parsing
 
 import scrapy

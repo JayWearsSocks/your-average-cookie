@@ -78,14 +78,14 @@ class cookieTestSpider(scrapy.Spider):
 
 class CookieSpider(scrapy.Spider):
     name = "cookie"
-    # crawl pages from search results one-by-one, to avoid getting blocked
-    start_urls = [
-        "https://www.allrecipes.com/search?q=cookie",
-        # "https://www.allrecipes.com/search?q=cookie&offset=24",
-        # "https://www.allrecipes.com/search?q=cookie&offset=48",
-        # "https://www.allrecipes.com/search?q=cookie&offset=72",
-        # "https://www.allrecipes.com/search?q=cookie&offset=96",
-    ]
+
+    # crawl pages from only one page of search results to avoid getting blocked
+    async def start(self):
+        offset = (int(self.page) - 1) * 24
+        self.log(f'Offset is {offset}')
+        start_url = f"https://www.allrecipes.com/search?q=cookie&offset={offset}"
+        self.log(f'start url is {start_url}')
+        yield scrapy.Request(url=start_url, callback=self.parse)
 
     def parse(self, response):
         recipes = response.css(
@@ -93,11 +93,6 @@ class CookieSpider(scrapy.Spider):
         for recipe in recipes:
             recipe_url = response.urljoin(recipe)
             yield scrapy.Request(url=recipe_url, callback=self.parse_recipe, cb_kwargs={'recipe_url': recipe_url})
-
-        # next_page = response.css(
-        #     'li.mntl-pagination__next a::attr(href)').get()
-        # if next_page is not None:
-        #     yield scrapy.Request(url=response.urljoin(next_page), callback=self.parse)
 
     def _clean_number_string(self, input):
         to_remove = str.maketrans('', '', '(),:')

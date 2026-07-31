@@ -47,6 +47,14 @@ The interactive scrapy shell can be used to explore the content of a page, repla
 scrapy shell "https://quotes.toscrape.com/page/1/"
 ``` 
 
+### Cookie spider
+
+The cookie spider scrapes all the recipes from one page of search results from allrecipes. Run it with argument `page=n` to get the results from page n (default 1). For example for page 9 (and storing the results in `webdata/allrecipes_cookies_p9.json`):
+
+```bash
+scrapy crawl "cookie" -a page=9 -O webdata/allrecipes_cookies_p9.json
+``` 
+
 ### Scrapy Settings
 
 Set the USER_AGENT to your browser's user agent. Can be found at e.g. https://www.whatismybrowser.com/detect/what-is-my-user-agent/

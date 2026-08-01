@@ -68,6 +68,7 @@ instance/
 # Scrapy stuff:
 .scrapy
 cookie_recipes/webdata
+cookie_recipes/more_webdata
 
 # Sphinx documentation
 docs/_build/
